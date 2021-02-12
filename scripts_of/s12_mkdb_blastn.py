@@ -32,10 +32,12 @@ o_file= args.out_file
 L_file=args.L_file
 
 #脚本运行命令日志
-mkdb_cmd="formatdb -i "+db_file+" -p F"
-q_cmd= "/share/app/blast-2.2.26/bin/blastall -p blastn -e 1e-5 -i "+q_file+" -o "+o_file+" -F F -d "+db_file+" -m 8 -W 11"
+#mkdb_cmd="formatdb -i "+db_file+" -p F"
+mkdb_cmd="./scripts_of/formatdb -i "+db_file+" -p F"
+#q_cmd= "/share/app/blast-2.2.26/bin/blastall -p blastn -e 1e-5 -i "+q_file+" -o "+o_file+" -F F -d "+db_file+" -m 8 -W 11"
+q_cmd= "./scripts_of/blastall -p blastn -e 1e-5 -i "+q_file+" -o "+o_file+" -F F -d "+db_file+" -m 8 -W 11"
 qLen_cmd= "python /hwfssz5/ST_INFECTION/Salmonella/liqiwen/bianshengzhe/liliqiang/bianshengzhe/bin/s12_count_fasta_length_biopython.py -i "+L_file
-print "将运行的命令如下"
+print "The command is as following:"
 print mkdb_cmd
 print q_cmd
 print qLen_cmd
@@ -49,7 +51,7 @@ os.system(q_cmd)
 #去掉工作目录生成的建库日志。
 os.system("rm ./formatdb.log")
 #统计参考序列长度
-print "序列长度统计结果如下："
+print "The length of sequence is as following："
 os.system(qLen_cmd)
 
 #处理m8数据，加一列列名，加一列coverage，filter，数据透视
@@ -64,8 +66,8 @@ def m8_to_matrix(in_m8 = o_file, in_length_fasta = L_file):
   #1.读入m8文件。
   m8_df = pd.read_csv(in_m8, sep = '\t')#读入m8文件表,检验了该表格，与m8文件一致无误！
   #m8_df.columns = colnames.split("\t")
-  print m8_df.columns
-  print m8_df
+  #print m8_df.columns
+  #print m8_df
 
   #2.生成qlength表，添加到m8表中,并且添加一列coverage。
   length_list = []
@@ -74,19 +76,19 @@ def m8_to_matrix(in_m8 = o_file, in_length_fasta = L_file):
     #print seq_record.id,len(seq_record)
   length_df = pd.DataFrame(length_list)#获得refgene 长度df表。
   length_df.columns = ["genename","ref_length"]
-  print length_df
+  #print length_df
 
   merge_df = pd.merge(m8_df, length_df, left_on=["query_id"],right_on=["genename"],how="left")
   merge_df["coverage"] = merge_df["alignment_length"]/merge_df["ref_length"]
-  print merge_df
+  #print merge_df
   
  #3.过滤原始的m8表。
   filter_df = merge_df[(merge_df["identity"]>=90)&(merge_df["coverage"]>=0.8)]#测试工作正常
-  print filter_df
+  #print filter_df
 
  #4.生成数据透视表。
   pivot_df = filter_df.pivot_table(index="subject_id",columns="query_id",values="bit_score",aggfunc="count") #已本地excel测试，该透视表无误一致。 
-  print pivot_df
+  #print pivot_df
 
  #输出blastn该步的所有结果文件
   o_dir = "/".join(in_m8.split("/")[0:-1])
