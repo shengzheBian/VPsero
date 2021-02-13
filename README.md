@@ -64,3 +64,8 @@ The meaning of each column is as following:
 | Predict_O_sero | The predicted O-serogroup."One" means that the O-serogoup gene cluster didn't been extracted; "Ont" means that the it may be other known O-serogroup not included in VPsero or OUT. |
 | Predict_K_sero | The predicted K-serogroup. "Kne" and "Knt" are similar as "One" and "Ont". |
 | New_serotype | "New" means that VPsero predicted new serotype combination not in GB 4789.7-2013; "Exist" means that VPsero predicted existing serotype; "NULL" means that VPsero predicted serotype containing One/Kne or Ont/Knt. |
+
+
+## Citiation
+
+## Author
