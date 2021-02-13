@@ -51,12 +51,16 @@ python program.py -p example_data/prokka_result -o my_out_put_p -n 5
 
 ## Output Files:
 The key output file is `{output director name}/serotype_predict/04.predict_result/all_strain_predict_result.xlsx`.
+
 The meaning of each column is as following:
 
 | Column Name | Description |
 | --------- | ----------- |
-| .gff | This is the master annotation in GFF3 format, containing both sequences and annotations. It can be viewed directly in Artemis or IGV. |
-| .gbk | This is a standard Genbank file derived from the master .gff. If the input to prokka was a multi-FASTA, then this will be a multi-Genbank, with one record for each sequence. |
-| .fna | Nucleotide FASTA file of the input contig sequences. |
-| .faa | Protein FASTA file of the translated CDS sequences. |
-| .ffn | Nucleotide FASTA file of all the prediction transcripts (CDS, rRNA, tRNA, tmRNA, misc_RNA) |
+| strain_name | The name of the input strain genome assembly file. |
+| O_coaD_contig - O_hldD_direct | The information about O-serogroup gene cluster border genes. |
+| K_hldD_contig - K_glpX_direct | The information about K-serogroup gene cluster border genes. |
+| O_Spec_Gene | The specific genes found in O-serogroup gene cluster. If the suffix is _a or _b, it means that the O-serogroup needs to be identified by multiple genes |
+| K_Spec_Gene | The specific genes found in K-serogroup gene cluster. If the suffix is _a or _b, it means that the K-serogroup needs to be identified by multiple genes. |
+| Predict_O_sero | The predicted O-serogroup."One" means that the O-serogoup gene cluster didn't been extracted; "Ont" means that the it may be other known O-serogroup not included in VPsero or OUT. |
+| Predict_K_sero | The predicted K-serogroup. "Kne" and "Knt" are similar as "One" and "Ont". |
+| New_serotype | "New" means that VPsero predicted new serotype combination not in GB 4789.7-2013; "Exist" means that VPsero predicted existing serotype; "NULL" means that VPsero predicted serotype containing One/Kne or Ont/Knt. |
