@@ -43,9 +43,9 @@ python program.py -p example_data/prokka_result -o my_out_put_p -n 5
 #### Command line options
 ```
 -h  This help
--i  a director that contains all genome assemble fasta
--p  a director that contains all prokka results
--o  a director that generate analyze result
+-i  a directory that contains all genome assemble fasta
+-p  a directory that contains all prokka results
+-o  a directory that generate analyze result
 -n  set the thread number when genome annotate
 ```
 
@@ -61,8 +61,8 @@ The meaning of each column is as following:
 | K_hldD_contig - K_glpX_direct | The information about K-serogroup gene cluster border genes. |
 | O_Spec_Gene | The specific genes found in O-serogroup gene cluster. If the suffix is `_a` or `_b`, it means that the O-serogroup needs to be identified by multiple genes. |
 | K_Spec_Gene | The specific genes found in K-serogroup gene cluster. If the suffix is `_a` or `_b`, it means that the K-serogroup needs to be identified by multiple genes. |
-| Predict_O_sero | The predicted O-serogroup.`"One"` means that the O-serogoup gene cluster didn't been extracted; `"Ont"` means that the it may be other known O-serogroup not included in VPsero or OUT. |
-| Predict_K_sero | The predicted K-serogroup. `"Kne"` and `"Knt"` are similar as `"One"` and `"Ont"`. |
+| Predict_O_sero | The predicted O-serogroup.`"One"` means that the O-serogoup gene cluster didn't been extracted; `"Ont"` means that the it may be other known O-serogroup not included in VPsero or OUT. The prefix `"p"` means that the prediction robustness of this O-serogroup is limited by strain number|
+| Predict_K_sero | The predicted K-serogroup. `"Kne"`, `"Knt"` and `"p"` are similar as `"One"`, `"Ont"` and `"pOx"`. |
 | New_serotype | `"New"` means that VPsero predicted new serotype combination not in GB 4789.7-2013; `"Exist"` means that VPsero predicted existing serotype; `"NULL"` means that VPsero predicted serotype containing `One/Kne` or `Ont/Knt`. |
 
 
