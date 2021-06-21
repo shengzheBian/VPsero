@@ -505,9 +505,35 @@ def combine_02_03(in_blastn = o_dir_all+"02.blastn/filter_blastn.xlsx",in_O_info
     merge_final_output.rename(columns={u'predict_O_result':u'O_Spec_Gene',u'predict_K_result':u'K_Spec_Gene'},inplace=True)
     #colname_list = list(merge_final_output.columns)
     #colname_list
-    print (merge_final_output)
+    #print (merge_final_output)
     #print list(merge_final_output.columns)
 
+    #########test##########
+    #merge_final_output.iloc[3,27]= "O12"
+    #merge_final_output.iloc[1,27]= "O12"
+    #merge_final_output.iloc[2,27]= "O7"
+    #merge_final_output.iloc[2,28]= "K4"
+    #print merge_final_output.iloc[3,27]
+    ###################################
+    #format the output of predcit_O_sero and predict_K_sero-2011-6-22 
+       #method:conditonal select and give value by pandas loc,test is OK!
+    with open("source/output_QC.tab") as f_QC:
+        O_QC_list = [a.strip() for a in f_QC if a[0]=="O"]
+    with open("source/output_QC.tab") as f_QC:
+        K_QC_list = [b.strip() for b in f_QC if b[0]=="K"]
+    
+    for ele in O_QC_list:
+        print(merge_final_output[merge_final_output[u'Predict_O_sero']==ele])
+       # merge_final_output[merge_final_output[u'Predict_O_sero']==ele].loc[:,u'Predict_O_sero']="p"+ele
+        merge_final_output.loc[merge_final_output[u'Predict_O_sero']==ele,'Predict_O_sero'] = "p"+ele
+    
+    for ele in K_QC_list:
+        merge_final_output.loc[merge_final_output[u'Predict_K_sero']==ele,'Predict_K_sero'] = "p"+ele
+
+    ################################################
+
+
+    print (merge_final_output) 
 
     #output to result dir
     dir_cmd = "mkdir -p %s"%(o_dir_all+"04.predict_result")
