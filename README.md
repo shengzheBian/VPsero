@@ -63,10 +63,10 @@ The meaning of each column is as following:
 | K_Spec_Gene | The specific genes found in K-serogroup gene cluster. If the suffix is `_a` or `_b`, it means that the K-serogroup needs to be identified by multiple genes. |
 | Predict_O_sero | The predicted O-serogroup `"One"` means that the O-serogoup gene cluster didn't been extracted; Most of `"Ont"` might be the serogroups uncovered by VPsero or the sub-popluation of certain serogroup or novel serogroup populations. The prefix `"p"` means that the prediction robustness of this O-serogroup is limited by strain number. |
 | Predict_K_sero | The predicted K-serogroup. `"Kne"`, `"Knt"` and `"p"` are similar as `"One"`, `"Ont"` and `"pOx"`. |
-| New_serotype | `"New"` means that VPsero predicted new serotype which is combined by known O and K serogroups and not list in China National Food Safety Standard GB 4789.7-2013(see below table); `"Exist"` means that VPsero predicted existing serotype; `"NULL"` means that VPsero predicted serotype containing `One/Kne` or `Ont/Knt`. |
+| New_serotype | `"New"` means that VPsero predicted new serotype which is combined by known O and K serogroups and not list in China National Food Safety Standard GB 4789.7-2013(see below table S1); `"Exist"` means that VPsero predicted existing serotype; `"NULL"` means that VPsero predicted serotype containing `One/Kne` or `Ont/Knt`. |
 
   
-Supplement table 1 (China National Food Safety Standard GB 4789.7-2013)
+Supplemental table 1 (China National Food Safety Standard GB 4789.7-2013)
 | O serogroup | K serogroup|
 |-------------|------------|
 |1|1, 5, 20, 25, 26, 32, 38, 41, 56, 58, 60, 64, 69|
@@ -88,7 +88,7 @@ Supplement table 1 (China National Food Safety Standard GB 4789.7-2013)
 The `sensitivity` and `specifity` information of O and K serogroup is helpful to evaluating the prediction results from `VPsero`
 
 
-Supplement table 2
+Supplemental table 2
 |No.|O serogroup|Sensitivity|Specifity|Report serogroup|
 |---|----------|-----------|----------|----------------|
 |1|O4|0.910|0.970|O4|
@@ -104,7 +104,7 @@ Supplement table 2
 |11|O12|1.000|0.994|pO12|
 |12|O7|1.000|0.993|pO7|
   
-Supplement table 3
+Supplemental table 3
 |No.|K serogroup|Sensitivity|Specificity|Report serogroup|
 |--|--|--|--|---|
 |1|K6|0.980 |0.983 |K6|
