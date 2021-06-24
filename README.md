@@ -85,10 +85,10 @@ Supplemental table 1 (China National Food Safety Standard GB 4789.7-2013)
 
 
 ## Details of sensitivity and specifity of O and K serogroup
-The `sensitivity` and `specifity` information of O and K serogroup is helpful to evaluating the prediction results from `VPsero`
+The `sensitivity` and `specifity` information of O and K serogroup is helpful to evaluating the prediction results from `VPsero`(see below table S2 and S3)
 
 
-Supplemental table 2
+Supplemental table 2 (O serogroup)
 |No.|O serogroup|Sensitivity|Specifity|Report serogroup|
 |---|----------|-----------|----------|----------------|
 |1|O4|0.910|0.970|O4|
@@ -104,7 +104,7 @@ Supplemental table 2
 |11|O12|1.000|0.994|pO12|
 |12|O7|1.000|0.993|pO7|
   
-Supplemental table 3
+Supplemental table 3 (K serogroup)
 |No.|K serogroup|Sensitivity|Specificity|Report serogroup|
 |--|--|--|--|---|
 |1|K6|0.980 |0.983 |K6|
