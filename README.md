@@ -85,8 +85,7 @@ Supplement table (China National Food Safety Standard GB 4789.7-2013)
 
 
 ## Details of sensitivity and specifity of O and K serogroup
-
-
+<br/> </br>
 |No.|O serogroup|Sensitivity|Specifity|Report serogroup|
 |---|----------|-----------|----------|----------------|
 |1|O4|0.910|0.970|O4|
