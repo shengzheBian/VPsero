@@ -66,7 +66,7 @@ The meaning of each column is as following:
 | New_serotype | `"New"` means that VPsero predicted new serotype which is combined by known O and K serogroups and not list in China National Food Safety Standard GB 4789.7-2013(see below table); `"Exist"` means that VPsero predicted existing serotype; `"NULL"` means that VPsero predicted serotype containing `One/Kne` or `Ont/Knt`. |
 
   
-Supplement table (China National Food Safety Standard GB 4789.7-2013)
+Supplement table 1 (China National Food Safety Standard GB 4789.7-2013)
 | O serogroup | K serogroup|
 |-------------|------------|
 |1|1, 5, 20, 25, 26, 32, 38, 41, 56, 58, 60, 64, 69|
@@ -85,7 +85,8 @@ Supplement table (China National Food Safety Standard GB 4789.7-2013)
 
 
 ## Details of sensitivity and specifity of O and K serogroup
-<br/> </br>
+The `sensitivity` and `specifity` information of O and K serogroup is helpful to evaluating the prediction results from `VPsero` 
+Supplement table 2
 |No.|O serogroup|Sensitivity|Specifity|Report serogroup|
 |---|----------|-----------|----------|----------------|
 |1|O4|0.910|0.970|O4|
@@ -101,7 +102,7 @@ Supplement table (China National Food Safety Standard GB 4789.7-2013)
 |11|O12|1.000|0.994|pO12|
 |12|O7|1.000|0.993|pO7|
   
-  
+Supplement table 3
 |No.|K serogroup|Sensitivity|Specificity|Report serogroup|
 |--|--|--|--|---|
 |1|K6|0.980 |0.983 |K6|
