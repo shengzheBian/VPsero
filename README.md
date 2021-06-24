@@ -3,8 +3,8 @@
 
 ## Introduction
 
-`VPsero` is a software for serotype prediction of Vibrio parahaemolyticus based on Next-Generation 
-Sequencing technology. By inputting the strain genome assembly file or prokka genome annotation result, 
+`VPsero` is a software for serotype prediction of *Vibrio parahaemolyticus* from genomic sequences generated especially from high throughput Sequencing. 
+By inputting the strain genome assembly file or prokka genome annotation result, 
 it can predict strain’s O/K serotype and determine whether it is a new serotype combination.
 
 ## Installation
@@ -61,9 +61,10 @@ The meaning of each column is as following:
 | K_hldD_contig - K_glpX_direct | The information about K-serogroup gene cluster border genes. |
 | O_Spec_Gene | The specific genes found in O-serogroup gene cluster. If the suffix is `_a` or `_b`, it means that the O-serogroup needs to be identified by multiple genes. |
 | K_Spec_Gene | The specific genes found in K-serogroup gene cluster. If the suffix is `_a` or `_b`, it means that the K-serogroup needs to be identified by multiple genes. |
-| Predict_O_sero | The predicted O-serogroup.`"One"` means that the O-serogoup gene cluster didn't been extracted; `"Ont"` means that the it may be other known O-serogroup not included in VPsero or OUT. The prefix `"p"` means that the prediction robustness of this O-serogroup is limited by strain number. |
+| Predict_O_sero | The predicted O-serogroup.`"One"` means that the O-serogoup gene cluster didn't been extracted; Most of `"Ont"` might be the serogroups uncovered by VPsero or the
+sub-popluation of certain serogroup or novel serogroup populations. The prefix `"p"` means that the prediction robustness of this O-serogroup is limited by strain number. |
 | Predict_K_sero | The predicted K-serogroup. `"Kne"`, `"Knt"` and `"p"` are similar as `"One"`, `"Ont"` and `"pOx"`. |
-| New_serotype | `"New"` means that VPsero predicted new serotype combination not in GB 4789.7-2013; `"Exist"` means that VPsero predicted existing serotype; `"NULL"` means that VPsero predicted serotype containing `One/Kne` or `Ont/Knt`. |
+| New_serotype | `"New"` means that VPsero predicted new serotype which is combined by known O and K serogroups and not list in Table 1 of China National Food Safety Standard GB 4789.7-2013; `"Exist"` means that VPsero predicted existing serotype; `"NULL"` means that VPsero predicted serotype containing `One/Kne` or `Ont/Knt`. |
 
 
 ## Citiation
