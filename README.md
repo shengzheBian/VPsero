@@ -22,7 +22,7 @@ you will need the Anaconda Python distribution and package manager. After instal
 enviroment with VPsero’s dependencies:
 
 ```
-conda env create -f enviroment.yaml
+conda env create -f environment.yaml
 source activate VPsero
 ```
 
