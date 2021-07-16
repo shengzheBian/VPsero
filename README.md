@@ -52,7 +52,7 @@ python program.py -p example_data/prokka_result -o my_out_put_p -n 5
 ```
 -h  This help
 -i  a directory that contains all genome assemble fasta
--p  a directory that contains all prokka results
+-p  a directory that contains all prokka results. Note: the result of every strain is a folder containing files such as `.ffn .gff`. You can refer to example_data/prokka_result
 -o  a directory that generate analyze result
 -n  set the thread number when genome annotate
 ```
