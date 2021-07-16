@@ -36,11 +36,12 @@ L_file=args.L_file
 mkdb_cmd="./scripts_of/formatdb -i "+db_file+" -p F"
 #q_cmd= "/share/app/blast-2.2.26/bin/blastall -p blastn -e 1e-5 -i "+q_file+" -o "+o_file+" -F F -d "+db_file+" -m 8 -W 11"
 q_cmd= "./scripts_of/blastall -p blastn -e 1e-5 -i "+q_file+" -o "+o_file+" -F F -d "+db_file+" -m 8 -W 11"
-qLen_cmd= "python /hwfssz5/ST_INFECTION/Salmonella/liqiwen/bianshengzhe/liliqiang/bianshengzhe/bin/s12_count_fasta_length_biopython.py -i "+L_file
+#qLen_cmd= "python /hwfssz5/ST_INFECTION/Salmonella/liqiwen/bianshengzhe/liliqiang/bianshengzhe/bin/s12_count_fasta_length_biopython.py -i "+L_file
+print ""
 print "The command is as following:"
 print mkdb_cmd
 print q_cmd
-print qLen_cmd
+#print qLen_cmd
 
 #对接收的文件进行建库
 os.system(mkdb_cmd)
@@ -51,8 +52,8 @@ os.system(q_cmd)
 #去掉工作目录生成的建库日志。
 os.system("rm ./formatdb.log")
 #统计参考序列长度
-print "The length of sequence is as following："
-os.system(qLen_cmd)
+#print "The length of sequence is as following："
+#os.system(qLen_cmd)
 
 #处理m8数据，加一列列名，加一列coverage，filter，数据透视
 
