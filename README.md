@@ -36,7 +36,7 @@ you will need to install `prokka` referring to https://github.com/tseemann/prokk
 python program.py -i example_data/genome_assembly_seq -o my_out_put_i  -n 5
 ```
 * If you have prokka results, you can set -p parameter to skip genome annotation step：
-(Note: The parameters of prokka should be --force --fast --gcode 11, and the result of every strain is a folder containing files such as .ffn .gff.)
+(Note: The parameters of your prokka should be --force --fast --gcode 11, and the result of every strain is a folder containing files such as .ffn .gff.)
 ```
 python program.py -p example_data/prokka_result -o my_out_put_p -n 5
 ```
