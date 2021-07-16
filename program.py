@@ -95,7 +95,17 @@ def genome_annote(in_dir=in_dir,o_dir_all=o_dir_all,thread_num=1):
     ### make director
     annote_dir = o_dir_all+"01.annote/"
     os.system("mkdir -p "+annote_dir)
-     
+    
+
+    ### test if prokka is in environment 
+    status = os.system("prokka -h")
+    try:
+        if (status != 0):
+            raise RuntimeError
+        except RuntimeError as e:
+            print("Prokka analyse is wrong ,Please check your software,for example, did you add it in environment?")
+            os._exit(0)
+
     ### make prokka shell in one file
     fna_list = os.listdir(in_dir)
     
@@ -193,9 +203,10 @@ def query_spec_gene(in_dir=o_dir_all+"01.annote/",in_spec=program_dir+"source/sp
     os.chdir(program_dir)  #2021-7-16
     status=os.system (sh_cmd)
     os.chdir(o_dir_all)    #2021-7-16
+    print status
     try:
         if (status != 0):
-                    raise RuntimeError
+            raise RuntimeError
     except RuntimeError as e:
         print("blastn Erro! please Check it")
         os._exit(0)
