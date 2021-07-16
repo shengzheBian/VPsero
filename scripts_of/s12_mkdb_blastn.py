@@ -44,10 +44,28 @@ print q_cmd
 #print qLen_cmd
 
 #对接收的文件进行建库
-os.system(mkdb_cmd)
+status = os.system(mkdb_cmd)
+#try:
+#    if (status != 0):
+#        raise RuntimeError                                                                 
+#except RuntimeError as e:
+#    print("blastn format db wrong!")
+#    os._exit(0)
+if (status !=0):
+    print("blastn format db wrong! maybe you need to chmod according to github document")
+    raise RuntimeError("blastn format db wrong!")
+
 
 #搜索需要查找的序列。
-os.system(q_cmd)
+print ""
+print "The command is as following:"
+print q_cmd
+status = os.system(q_cmd)
+
+if (status != 0):
+    print("blastn is wrong! maybe you need to chmod according to github document")
+    raise RuntimeError("blastn is wrong!")
+
 
 #去掉工作目录生成的建库日志。
 os.system("rm ./formatdb.log")
