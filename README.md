@@ -28,7 +28,7 @@ source activate VPsero
 
 In order to perform a complete analysis process from strain genome assembly file,
 you will need to install `prokka` referring to https://github.com/tseemann/prokka. If you have the prokka result, this installation step is not necessary.  
-**Note**：My test prokka version is 1.13. The parameters of your prokka should be `--force --fast --gcode 11`, the result of every strain is a folder containing files such as `.ffn .gff`. What'more, the database of your prokka must contain following, you can type `prokka --listdb` to check.
+**Note**：My test prokka version is 1.13. The parameters of your prokka should be `--force --fast --gcode 11`, the result of every strain is a folder containing files such as `.ffn .gff`. What'more, the database of your prokka must contain following, you can type `prokka --listdb` to check. If you want to include prokka in VPsero software, please add it in environment variable.
 ```
 * Kingdoms: Archaea Bacteria Mitochondria Viruses
 * Genera: Enterococcus Escherichia Staphylococcus
