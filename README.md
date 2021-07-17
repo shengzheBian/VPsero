@@ -161,6 +161,25 @@ Supplemental table 3 (K serogroup)
 |44|K37|-|-|-|
 |45|K10|-|-|-|
 |46|K53|-|-|-|
+
+## Log File:
+In order to monitor the analysis process and locate errors, I set up a log system. The log file is in `{output director name}/serotype_predict/VPsero.log`. If the analysis is successfully completed, the log is like following table:
+|Time|Log level|Line number|Message|
+|---|-----------|--------|--------|
+|08:59:24|INFO|659 |##############################################################################|
+08:59:24|        INFO |660 |1.copying prokka results to 01.annote/ begin|
+08:59:24|        INFO |662 |1.copying prokka results is OK|
+08:59:24|       INFO |664 |##############################################################################|
+08:59:24|        INFO| 665| 2.blastn to find specific gene begin !|
+08:59:24 |       DEBUG| 203| Some key commands|
+08:59:27  |      INFO| 667| 2.blastn is OK|
+08:59:27   |     INFO| 669|##############################################################################|
+08:59:27    |    INFO| 670 |3.extract gene cluster and border analyse begin !|
+08:59:27 |       DEBUG| 251| Some key commands|
+08:59:28  |      INFO| 672 |3.border analyse is OK|
+08:59:28   |     INFO| 674 |##############################################################################|
+08:59:28    |    INFO| 675 |4.predict O and K serogroup begin !|
+08:59:28     |   INFO| 677 |all is OK|
 ## Citiation
 
 ## Author
