@@ -12,6 +12,7 @@ import re
 import pandas as pd
 import numpy as np
 import sys
+import logging
 ###############ingore warning info
 pd.set_option('mode.chained_assignment',None)
 #parameter input and recognize
@@ -73,6 +74,23 @@ if thread_num == None:
 else:
     thread_num = int(thread_num)
 
+####set logging
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
+   #create a handler,write in log
+log_name=o_dir_all+"VPsero.log"
+fh = logging.FileHandler(log_name,mode="w")
+fh.setLevel(logging.DEBUG)
+   #define the log output format
+#fmt = "%(asctime)-15s %(levelname)s %(filename)s %(lineno)d %(message)s"
+fmt = "%(asctime)-15s %(levelname)s %(lineno)d %(message)s"
+#datefmt = "%a %d %b %Y %H:%M:%S"
+datefmt = "%H:%M:%S"
+formatter = logging.Formatter(fmt,datefmt)
+   #add logger in handler
+fh.setFormatter(formatter)
+logger.addHandler(fh)
+
 ####program_dir and scripts source dir
 program_py_dir=sys.argv[0]   #2021-7-16: auto find the program.py dir,and change the work dir
 if program_py_dir == "program.py":
@@ -80,8 +98,7 @@ if program_py_dir == "program.py":
 if program_py_dir[0] == "/":
     dir_split=program_py_dir.split("/")
     program_dir = "/".join(dir_split[0:len(dir_split)-1])+"/"
-print("the program_dir is "+program_dir)
-
+logger.info("the program_dir is "+program_dir)
 
 
 #input fasta name can't contain "ffn"
@@ -102,9 +119,9 @@ def genome_annote(in_dir=in_dir,o_dir_all=o_dir_all,thread_num=1):
     try:
         if (status != 0):
             raise RuntimeError
-        except RuntimeError as e:
-            print("Prokka analyse is wrong ,Please check your software,for example, did you add it in environment?")
-            os._exit(0)
+    except RuntimeError as e:
+        logger.error("Prokka analyse is wrong ,Please check your software,for example, did you add it in environment?")
+        os._exit(0)
 
     ### make prokka shell in one file
     fna_list = os.listdir(in_dir)
@@ -118,7 +135,7 @@ def genome_annote(in_dir=in_dir,o_dir_all=o_dir_all,thread_num=1):
             if (status != 0):
                 raise RuntimeError
         except RuntimeError as e:
-            print("Prokka scripts generate wrong, please check it")
+            logger.error("Prokka scripts generate wrong, please check it")
             os._exit(0)
 
     ### run prokka by thread_number setted.
@@ -132,7 +149,8 @@ def genome_annote(in_dir=in_dir,o_dir_all=o_dir_all,thread_num=1):
     split_cmd = "split -l %s -a 4 -d %s prokka_thread" % (str(l_set),o_dir_all+"middle_file/prokka.sh")
     os.system(split_cmd)#linux run cmd by order.
     os.system("rm prokka.sh")
-    print "run cmd:"+split_cmd
+
+    logger.debug ("run cmd:"+split_cmd)
 
     prokka_thread_cmd_file = os.listdir(o_dir_all+"middle_file/")
     for i in prokka_thread_cmd_file:
@@ -141,7 +159,7 @@ def genome_annote(in_dir=in_dir,o_dir_all=o_dir_all,thread_num=1):
             if (status != 0):
                 raise RuntimeError
         except RuntimeError as e:
-            print("Prokka analyse is wrong ,Please check your software,for example, did you add it in environment?")
+            logger.error("Prokka analyse is wrong ,Please check your software,for example, did you add it in environment?")
             os._exit(0)
 
         print "sh %s &"%(i)
@@ -154,7 +172,7 @@ def genome_annote(in_dir=in_dir,o_dir_all=o_dir_all,thread_num=1):
             break
     ##remove middle file
     os.system("rm ../middle_file/*")
-    print "prokka module is OK!!!"
+    logger.info ("prokka module is OK!!!")
             
     os.chdir (python_dir)
     
@@ -180,38 +198,40 @@ def query_spec_gene(in_dir=o_dir_all+"01.annote/",in_spec=program_dir+"source/sp
 
     #1.cat all genenome fasta to 1.
     cat_cmd = "cat %s*/*ffn>%s" % (in_dir , o_dir_all+"middle_file/all_genome.fasta")
-    print("")
-    print("The command is as following:")
-    print(cat_cmd)
+    logger.info("")
+    #logger.info("The command is as following:")
+    logger.debug(cat_cmd)
     cat_stat = os.system (cat_cmd)#OK!! have test!
     try:
         if (cat_stat != 0):
             raise RuntimeError
     except RuntimeError as e:
-        print("cat * ffn file from prokka is error! please check your input data in 01.annot/, makfesure if they are generate from prokka or prepared, and one strain is one fold with .ffn postfix, the format please refer VPsero's exampledata/prokka_result/ ") 
+        logger.error("cat * ffn file from prokka is error! please check your input data in 01.annot/, makfesure if they are generate from prokka or prepared, and one strain is one fold with .ffn postfix, the format please refer VPsero's exampledata/prokka_result/ ") 
         os._exit(0)     
     
     os.system ("mkdir -p %s02.blastn"%(o_dir_all))
-    print cat_cmd
+    logger.debug(cat_cmd)
     
     #2.blast,calculate,filter,data toushi sheet
     
     sh_cmd = "python %s -idb %s -iq %s -o %s -iL %s" % (program_dir+"scripts_of/s12_mkdb_blastn.py",o_dir_all+"middle_file/all_genome.fasta", in_spec, o_dir_all+"02.blastn/blastn.m8", in_spec)
-    print("")
-    print("The command is as following:")
-    print sh_cmd
-    os.chdir(program_dir)  #2021-7-16
-    status=os.system (sh_cmd)
-    os.chdir(o_dir_all)    #2021-7-16
-    print status
+    logger.info("")
+    #logger.info("The command is as following:")
+    logger.debug(sh_cmd)
+    if program_dir == "":
+        status=os.system (sh_cmd)
+    else:
+        os.chdir(program_dir)  #2021-7-16
+        status=os.system (sh_cmd)
+        os.chdir(o_dir_all)    #2021-7-16
     try:
         if (status != 0):
             raise RuntimeError
     except RuntimeError as e:
-        print("blastn Erro! please Check it")
+        logger.error("blastn is Error! please Check it")
         os._exit(0)
 
-    print "blastn OK!"
+    logger.info("blastn OK!")
     
 ###################################function3###################
    #function3:
@@ -226,9 +246,9 @@ def border_analyze(in_dir=o_dir_all+"01.annote/"):
     def one_border_process(gene, in_dir=o_dir_all+"01.annote/"):
         #1.filter this border gene to one gff.
         grep_gff_cmd = "cat %s|grep ID |grep %s >%s" % (in_dir+"*/*gff",gene,o_dir_all+"03.border_analyze/"+gene)
-        print("")
-        print("The command is as following:")
-        print grep_gff_cmd
+        logger.info("")
+        #print("The command is as following:")
+        logger.debug(grep_gff_cmd)
         os.system(grep_gff_cmd)
         
         #2.trans gff to tsv.
@@ -611,47 +631,47 @@ try:
     if (in_dir != None) and (prokka_dir != None):
         raise RuntimeError
 except RuntimeError as e:
-    print("Parameter Erro! You can't set the -i and -p parameters at the same time!")
+    logger.error("Parameter is Error! You can't set the -i and -p parameters at the same time!")
     os._exit(0)
 
 if in_dir != None:
-    print ("###########################################################################################")
-    print("1.genome annote by Prokka begin!")
+    logger.info("###########################################################################################")
+    logger.info("1.genome annote by Prokka begin!")
     genome_annote(thread_num=thread_num)
-    print "1.genome annote is OK"
+    logger.info("1.genome annote is OK")
     
-    print ("###########################################################################################")
-    print("2.blastn to find specific gene begin !")
+    logger.info ("###########################################################################################")
+    logger.info("2.blastn to find specific gene begin !")
     query_spec_gene(in_dir=o_dir_all+"01.annote/",in_spec=program_dir+"source/spec_gene_final.fasta")
-    print "2.blastn is OK"
+    logger.info("2.blastn is OK")
 
-    print ("###########################################################################################")
-    print ("3.extract gene cluster and border analyse begin !")
+    logger.info ("###########################################################################################")
+    logger.info ("3.extract gene cluster and border analyse begin !")
     border_analyze(in_dir=o_dir_all+"01.annote/")
-    print "3.border analyse is OK"
+    logger.info("3.border analyse is OK")
 
-    print ("###########################################################################################")
-    print ("4.predict O and K serogroup begin !")
+    logger.info("###########################################################################################")
+    logger.info("4.predict O and K serogroup begin !")
     combine_02_03(in_blastn = o_dir_all+"02.blastn/filter_blastn.xlsx",in_O_info = o_dir_all+"03.border_analyze/all_strain_O_info.xlsx", in_K_info = o_dir_all+"03.border_analyze/all_strain_K_info.xlsx")
-    print "all is OK"
+    logger.info("all is OK")
 
 if prokka_dir != None:
-   print ("###########################################################################################")
-   print ("1.copying prokka results to 01.annote/ begin")
+   logger.info("###########################################################################################")
+   logger.info("1.copying prokka results to 01.annote/ begin")
    copy_prokka_result()
-   print "1.copying prokka results is OK"
+   logger.info ("1.copying prokka results is OK")
    
-   print ("###########################################################################################")
-   print("2.blastn to find specific gene begin !")                                                                                                               
+   logger.info ("###########################################################################################")
+   logger.info("2.blastn to find specific gene begin !")                                                                                                               
    query_spec_gene(in_dir=o_dir_all+"01.annote/",in_spec=program_dir+"source/spec_gene_final.fasta")
-   print "2.blastn is OK"
+   logger.info ("2.blastn is OK")
 
-   print ("###########################################################################################")
-   print ("3.extract gene cluster and border analyse begin !")
+   logger.info ("###########################################################################################")
+   logger.info ("3.extract gene cluster and border analyse begin !")
    border_analyze(in_dir=o_dir_all+"01.annote/")
-   print "3.border analyse is OK"
+   logger.info("3.border analyse is OK")
    
-   print ("###########################################################################################")
-   print ("4.predict O and K serogroup begin !") 
+   logger.info ("###########################################################################################")
+   logger.info ("4.predict O and K serogroup begin !") 
    combine_02_03(in_blastn = o_dir_all+"02.blastn/filter_blastn.xlsx",in_O_info = o_dir_all+"03.border_analyze/all_strain_O_info.xlsx", in_K_info = o_dir_all+"03.border_analyze/all_strain_K_info.xlsx")
-   print "all is OK"
+   logger.info("all is OK")
