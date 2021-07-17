@@ -163,7 +163,7 @@ Supplemental table 3 (K serogroup)
 |46|K53|-|-|-|
 
 ## Log File:
-In order to monitor the analysis process and locate errors, I set up a log system. The log file is in `{output director name}/serotype_predict/VPsero.log`. If the analysis is successfully completed, the log is like following table:
+In order to monitor the analysis process and locate errors, I set up a log system. The log file is in `{output director name}/serotype_predict/VPsero.log`. If the analysis is successfully completed, the log is like following table: The `INFO` log level indicates the step of analyse, while the `DEBUG` log level indicates the key command in every step. The line number is the location in program.py. 
 |Time|Log level|Line number|Message|
 |---|-----------|--------|--------|
 |08:59:24|INFO|659 |##############################################################################|
@@ -180,6 +180,7 @@ In order to monitor the analysis process and locate errors, I set up a log syste
 08:59:28   |     INFO| 674 |##############################################################################|
 08:59:28    |    INFO| 675 |4.predict O and K serogroup begin !|
 08:59:28     |   INFO| 677 |all is OK|
+
 ## Citiation
 
 ## Author
