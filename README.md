@@ -181,6 +181,16 @@ In order to monitor the analysis process and locate errors, I set up a log syste
 08:59:28    |    INFO| 675 |4.predict O and K serogroup begin !|
 08:59:28     |   INFO| 677 |all is OK|
 
+VPsero captures possible user errors, writes them to the log with ERROR log level and interrupts the program in time. Several common errors and troubleshooting suggestions are shown in the table below:
+|Log level|Message|Suggestion|
+|---------|------|-----------|
+ERROR|Parameter is error|Can’t set the program parameters -i and -p at the same time|
+ERROR|Prokka analyse is error|Need to check whether prokka is installed correctly or add environment variables, refer to the installation section.|
+ERROR|Cat * ffn file from prokka is error |If provide your prokka results, you need to ensure that the format is in accordance with example_data/prokka_result: every strain is a fold, and the files inside must have suffixes such as gff and ffn.
+ERROR|  Blastn is error|Make sure you have change mode of scripts_of/blastall and scripts_of/formatdb, refer to the installation section.
+
+
+
 ## Citiation
 
 ## Author
