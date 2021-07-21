@@ -2,7 +2,12 @@
 #!/usr/bin/env python
 # coding=utf-8
 
+#change log:2021-7-21: grep hldD not uniprot id to query border gene, because the difference of prokka version. 
+
+
+
 #main program: recognize input, use function.
+
 
 import argparse
 import os
@@ -115,7 +120,7 @@ def genome_annote(in_dir=in_dir,o_dir_all=o_dir_all,thread_num=1):
     
 
     ### test if prokka is in environment 
-    status = os.system("prokka -h")
+    status = os.system("prokka -v")
     try:
         if (status != 0):
             raise RuntimeError
@@ -277,7 +282,7 @@ def border_analyze(in_dir=o_dir_all+"01.annote/"):
         return border_gene_df   
     #run function
     coaD = one_border_process(gene="coaD")#the border gene of O,coaD
-    hldD = one_border_process(gene="P67911")#the border gene of O and K,hldD
+    hldD = one_border_process(gene="hldD")#the border gene of O and K,hldD #2021-7-21 changed
     glpX = one_border_process(gene="P0A9C9")# the border gene of K,glpX
     #test = pd.DataFrame([["05-3133.fna","LRAI01000025.2","05-3133.fna_02345","B7V2S6","174654","175136","+"]])#######test
     #coaD = coaD.append(test,ignore_index=True)########test
