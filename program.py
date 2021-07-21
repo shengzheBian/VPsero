@@ -25,10 +25,10 @@ parser = argparse.ArgumentParser(description="Prediction for Serotype of Vibrio 
 
 parser.add_argument("-i","--in_dir", metavar="<dir>",
                                  required=False,action="store",dest="in_dir",
-                                 help="a director that contains all genome assemble fasta file,the work dir must be in software")
+                                 help="a director that contains all genome assemble fasta file.")
 
 parser.add_argument("-p","--prokka_result", metavar="<dir>",
-                                                  required=False,action="store",dest="prokka_dir",                                                              help="set a director that contains all prokka results, and program will skip the prokka step, the work dir must be in software")
+                                                  required=False,action="store",dest="prokka_dir",                                                              help="set a director that contains all prokka results, and program will skip the prokka step")
 
 parser.add_argument("-o","--out_dir", metavar="<dir>",
                                   required=True,action="store",dest="out_dir",
@@ -68,7 +68,9 @@ if prokka_dir != None:
     if prokka_dir[-1] != "/":
         prokka_dir = prokka_dir+"/"
  
-
+#if output dir exist,rm it.
+if os.path.exists(o_dir+"serotype_predict"):
+    os.system("rm -r "+o_dir+"serotype_predict")
 os.system("mkdir -p "+o_dir+"serotype_predict")
 
 o_dir_all = o_dir+"serotype_predict/"
@@ -104,6 +106,10 @@ if program_py_dir[0] == "/":
     dir_split=program_py_dir.split("/")
     program_dir = "/".join(dir_split[0:len(dir_split)-1])+"/"
 logger.info("the program_dir is "+program_dir)
+
+    ###chmod of bin file
+cmd_chmd = "chmod -R 777 "+program_dir+"scripts_of"
+os.system(cmd_chmd)
 
 
 #input fasta name can't contain "ffn"
@@ -155,7 +161,7 @@ def genome_annote(in_dir=in_dir,o_dir_all=o_dir_all,thread_num=1):
     os.system(split_cmd)#linux run cmd by order.
     os.system("rm prokka.sh")
 
-    logger.debug ("run cmd:"+split_cmd)
+    logger.debug (split_cmd)
 
     prokka_thread_cmd_file = os.listdir(o_dir_all+"middle_file/")
     for i in prokka_thread_cmd_file:
