@@ -184,8 +184,8 @@ VPsero captures possible user errors, writes them to the log with ERROR log leve
 |---------|------|-----------|
 ERROR|Parameter is error|Can’t set the program parameters -i and -p at the same time|
 ERROR|Prokka analyse is error|Need to check whether prokka is installed correctly. You can type `prokka -v` to test.|
-ERROR|Cat * ffn file from prokka is error |If provide your prokka results, you need to ensure that the format is in accordance with example_data/prokka_result: every strain is a fold, and the files inside must have suffixes such as gff and ffn. I suggest that these results come from the prokka V1.14.6, and use the parameters according to installation section, because they have been well tested in VPsero.|
-ERROR|  Blastn is error|Make sure `blastall`,`formatdb`,`s12_mkdb_blastn.py` three files all in `scripts_of` directory, and have changed the mode of `scripts_of/blastall` and `scripts_of/formatdb` according to the installation section.|
+ERROR|Cat * ffn file from prokka is error |If provide your prokka results, you need to ensure that the format is in accordance with `example_data/prokka_result`: every strain is a fold, and the files inside must have suffixes such as gff and ffn. I suggest that these results come from the prokka V1.14.6, and use the parameters according to installation section, because they have been well tested in VPsero.|
+ERROR|  Blastn is error|Make sure `blastall`,`formatdb`,`s12_mkdb_blastn.py` three files are all in `scripts_of` directory, and have changed the mode of `scripts_of/blastall` and `scripts_of/formatdb` according to the installation section.|
 
 
 
