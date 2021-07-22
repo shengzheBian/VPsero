@@ -26,9 +26,7 @@ conda env create -f environment.yaml
 source activate VPsero
 ```
 
-In order to perform a complete analysis process from strain genome assembly file,
-you will need to install `prokka` referring to https://github.com/tseemann/prokka. If you have the prokka result, this installation step is not necessary.  
-**Note**：My test prokka version is 1.13. The parameters of your prokka should be `--force --fast --gcode 11`, the result of every strain is a folder containing files such as `.ffn .gff`. What's more, the database of your prokka must contain following, you can type `prokka --listdb` to check. If you want to include prokka in VPsero software, please add it in environment variable.
+Now, VPsero automatically installs prokka V1.14.6, which increases software’s robustness and portability. However, you can also provide the prokka results of your own analysis as the input of the program with parameter `-p`. Ensure that the data format is in accordance with example_data/prokka_result: every strain is a fold, and the files inside must have suffixes such as `.gff .ffn`. I suggest that these results come from the same prokka version, use the parameters `--force --fast --gcode 11`, and use the following databases, because these parameters have been well tested in VPsero.
 ```
 prokka --listdb
 * Kingdoms: Archaea Bacteria Mitochondria Viruses
