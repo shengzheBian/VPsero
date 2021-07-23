@@ -3,7 +3,7 @@
 
 ## Introduction
 
-`VPsero` is a software for serotype prediction of *Vibrio parahaemolyticus* from genomic sequences generated especially from high throughput Sequencing. 
+`VPsero` is a software on linux system for serotype prediction of *Vibrio parahaemolyticus* from genomic sequences generated especially from high throughput Sequencing. 
 By inputting the strain genome assembly file or prokka genome annotation result, 
 it can predict strain’s O/K serotype and determine whether it is a new serotype combination.
 
