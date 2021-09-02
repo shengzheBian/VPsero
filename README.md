@@ -190,6 +190,6 @@ ERROR|  Blastn is error|Make sure `blastall`,`formatdb`,`s12_mkdb_blastn.py` thr
 
 
 ## Citiation
-Bian S, Jia Y, Zhan Q, Wong N-K, Hu Q, Zhang W, Zhang Y and Li L(2021) VPsero: Rapid Serotyping of Vibrio parahaemolyticus Using Serogroup-Specific Genes Based on Whole-Genome Sequencing Data. Front. Microbiol. 12:620224. doi: 10.3389/fmicb.2021.620224  
-Bian S, Zeng W, Li Q, Li Y, Wong N-K, Jiang M, Zuo L, Hu Q and Li L (2021) Genetic Structure, Function, and Evolution of Capsule Biosynthesis Loci in Vibrio parahaemolyticus. Front. Microbiol. 11:546150. doi: 10.3389/fmicb.2020.546150
+Bian S, Jia Y, Zhan Q, Wong N-K, Hu Q, Zhang W, Zhang Y and Li L(2021) VPsero: Rapid Serotyping of Vibrio parahaemolyticus Using Serogroup-Specific Genes Based on Whole-Genome Sequencing Data. Front. Microbiol. 12:620224. doi: 10.3389/fmicb.2021.620224.  
+Bian S, Zeng W, Li Q, Li Y, Wong N-K, Jiang M, Zuo L, Hu Q and Li L (2021) Genetic Structure, Function, and Evolution of Capsule Biosynthesis Loci in Vibrio parahaemolyticus. Front. Microbiol. 11:546150. doi: 10.3389/fmicb.2020.546150.
 ## Author
